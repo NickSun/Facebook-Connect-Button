@@ -33,7 +33,7 @@ $this->widget('ext.facebookconnect.FacebookConnectButton',
 		'template' => '<span>{label}</span>',
 		'redirect_uri' => CHtml::normalizeUrl(array('/site/index')),
 		'scope' => array('offline_access', 'publish_stream'),
-		'popup' => false,
+		'display' => 'popup',
 		'htmlOptions' => array(
 			'class' => 'fb_auth',
 		)
