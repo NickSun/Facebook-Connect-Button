@@ -102,6 +102,10 @@ class FacebookApiException extends Exception
 
 }
 
+/**
+ * FConnect class
+ * Based on Fasebook SDK v.3.1.1
+ */
 class FConnect
 {
 
@@ -515,14 +519,8 @@ class FConnect
 	public static function api(/* polymorphic */)
 	{
 		$args = func_get_args();
-		if (is_array($args[0]))
-		{
-			return self::_restserver($args[0]);
-		}
-		else
-		{
-			return call_user_func_array(array(__CLASS__, '_graph'), $args);
-		}
+
+		return call_user_func_array(array(__CLASS__, '_graph'), $args);
 	}
 
 	/**
@@ -967,9 +965,22 @@ class FConnect
 		throw $e;
 	}
 
+	/**
+	 * Logout user and clear all facebook session data
+	 */
 	public static function logout()
 	{
 		self::clearAllPersistentData();
+	}
+
+	/**
+	 * Returns info about logged in user
+	 *
+	 * @return array
+	 */
+	public static function getUserInfo()
+	{
+		return self::api("/me");
 	}
 
 }

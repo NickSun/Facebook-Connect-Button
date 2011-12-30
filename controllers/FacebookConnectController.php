@@ -1,15 +1,21 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * FacebookConnectController class
+ * @author Nikonov Andrey <nikonov@zfort.net>
+ * @link http://www.zfort.com/
+ * @copyright Copyright &copy; 2000-2011 Zfort Group
+ * @license http://www.zfort.com/terms-of-use
+ * @version $Id$
+ * @package packageName
+ * @since 1.0
  */
 
 class FacebookConnectController extends Controller
 {
 
 	/**
-	 *
+	 * Displays the login page
 	 */
 	public function actionLogin()
 	{
@@ -35,6 +41,9 @@ class FacebookConnectController extends Controller
 		Yii::app()->end();
 	}
 
+	/**
+	 * Displays the logout page
+	 */
 	public function actionLogout()
 	{
 		$redirect_uri = Yii::app()->getRequest()->getQuery('redirect_uri');
