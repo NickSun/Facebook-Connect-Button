@@ -13,24 +13,27 @@
 
 class FacebookConnect extends CApplicationComponent
 {
+
 	/**
-	* The Application ID.
-	*
-	* @var string
-	*/
+	 * The Application ID.
+	 *
+	 * @var string
+	 */
 	public $appId;
 
 	/**
-	* The Application API Secret.
-	*
-	* @var string
-	*/
+	 * The Application API Secret.
+	 *
+	 * @var string
+	 */
 	public $secret;
 
-	public function init() {
+	public function init()
+	{
 		parent::init();
 
-		if (!empty($this->appId) && !empty($this->secret)) {
+		if (!empty($this->appId) && !empty($this->secret))
+		{
 			Yii::setPathOfAlias('facebookconnect', dirname(__FILE__));
 			Yii::import('facebookconnect.*');
 			Yii::import('facebookconnect.controllers.*');
@@ -38,15 +41,21 @@ class FacebookConnect extends CApplicationComponent
 			FConnect::init($this->appId, $this->secret);
 			FConnect::getUser();
 
-			if (Yii::app()->session->offsetExists('fb_popup')) {
+			if (Yii::app()->session->offsetExists('fb_popup'))
+			{
 				Yii::app()->session->offsetUnset('fb_popup');
-				if (Yii::app()->session->offsetExists('fb_redirect_uri')) {
+				if (Yii::app()->session->offsetExists('fb_redirect_uri'))
+				{
 					$href = Yii::app()->session->get('fb_redirect_uri');
 					Yii::app()->session->offsetUnset('fb_redirect_uri');
-					echo '<script type="text/javascript">if (window.opener && !window.opener.closed) { window.opener.location.href="' . $href . '"; } window.close();</script>';
-				} else {
-					echo '<script type="text/javascript">if (window.opener && !window.opener.closed) { window.opener.location.reload(); } window.close();</script>';
+					$js = 'if (window.opener && !window.opener.closed) { window.opener.location.href="' . $href . '"; } window.close();';
 				}
+				else
+				{
+					$js = 'if (window.opener && !window.opener.closed) { window.opener.location.reload(); } window.close();';
+				}
+
+				Yii::app()->clientScript->registerScript('fb_redirect', $js, CClientScript::POS_HEAD);
 			}
 
 			Yii::app()->configure(array(
@@ -56,7 +65,9 @@ class FacebookConnect extends CApplicationComponent
 					)
 				))
 			));
-		} else {
+		}
+		else
+		{
 			throw new Exception('You need to add appId and secret to config file!');
 		}
 	}
