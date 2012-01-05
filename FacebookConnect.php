@@ -39,7 +39,17 @@ class FacebookConnect extends CApplicationComponent
 			Yii::import('facebookconnect.controllers.*');
 
 			FConnect::init($this->appId, $this->secret);
-			FConnect::getUser();
+			$userId = FConnect::getUser();
+			if ($userId && Yii::app()->user->isGuest)
+			{
+				$identity = new FConnectUserIdentity($userId);
+				$identity->authenticate();
+				if ($identity->errorCode == FConnectUserIdentity::ERROR_NONE)
+				{
+					$duration = Yii::app()->user->allowAutoLogin ? 3600*24*30 : 0; // 30 days
+					Yii::app()->user->login($identity, $duration);
+				}
+			}
 
 			if (Yii::app()->session->offsetExists('fb_popup'))
 			{

@@ -154,6 +154,11 @@ class FConnect
 	 */
 	protected static $state;
 
+	/**
+	 * Keys to store in session
+	 *
+	 * @var array
+	 */
 	protected static $supportedKeys = array('state', 'code', 'access_token', 'user_id');
 
 	/**
@@ -971,6 +976,7 @@ class FConnect
 	public static function logout()
 	{
 		self::clearAllPersistentData();
+		Yii::app()->user->logout();
 	}
 
 	/**
@@ -980,7 +986,10 @@ class FConnect
 	 */
 	public static function getUserInfo()
 	{
-		return self::api("/me");
+		if (self::$user)
+			return self::api("/me");
+
+		return false;
 	}
 
 }

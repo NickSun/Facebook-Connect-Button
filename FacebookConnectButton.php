@@ -16,31 +16,31 @@ class FacebookConnectButton extends CWidget
 
 	/**
 	 * The template used to render link. In this template, the token "{label}" will be replaced with the corresponding label
-	 * @var string 
+	 * @var string
 	 */
 	protected $template = '<span>{label}</span>';
-	
+
 	/**
 	 * The link label
-	 * @var string 
+	 * @var string
 	 */
 	protected $label = 'Login';
-	
+
 	/**
 	 * The logout link label
-	 * @var string 
+	 * @var string
 	 */
 	protected $labelLogout = 'Logout';
-	
+
 	/**
 	 * HTML attributes to be rendered for the link
-	 * @var array 
+	 * @var array
 	 */
 	protected $htmlOptions = array();
-	
+
 	/**
 	 * Additional parameters that will be sent to Facebook
-	 * @var array 
+	 * @var array
 	 */
 	protected $params = array(
 		'display' => 'page',
@@ -123,8 +123,8 @@ class FacebookConnectButton extends CWidget
 
 	/**
 	 * Set HTML attributes
-	 * 
-	 * @param array $value 
+	 *
+	 * @param array $value
 	 */
 	public function setHtmlOptions($value)
 	{
@@ -164,8 +164,8 @@ class FacebookConnectButton extends CWidget
 
 	/**
 	 * Set redirect_uri
-	 * 
-	 * @param string $value 
+	 *
+	 * @param string $value
 	 */
 	public function setRedirect_uri($value)
 	{
@@ -177,8 +177,8 @@ class FacebookConnectButton extends CWidget
 
 	/**
 	 * Set display
-	 * 
-	 * @param string $value 
+	 *
+	 * @param string $value
 	 */
 	public function setDisplay($value)
 	{
@@ -190,8 +190,8 @@ class FacebookConnectButton extends CWidget
 
 	/**
 	 * Set scope. More info: http://developers.facebook.com/docs/reference/api/permissions/
-	 * 
-	 * @param mixed $value 
+	 *
+	 * @param mixed $value
 	 */
 	public function setScope($value)
 	{
@@ -205,8 +205,8 @@ class FacebookConnectButton extends CWidget
 
 	/**
 	 * Set label for link
-	 * 
-	 * @param string $value 
+	 *
+	 * @param string $value
 	 */
 	public function setLabel($value)
 	{
@@ -218,8 +218,8 @@ class FacebookConnectButton extends CWidget
 
 	/**
 	 * Set logout label for link
-	 * 
-	 * @param string $value 
+	 *
+	 * @param string $value
 	 */
 	public function setLabelLogout($value)
 	{
@@ -232,7 +232,7 @@ class FacebookConnectButton extends CWidget
 	/**
 	 * Set template for link
 	 *
-	 * @param string $value 
+	 * @param string $value
 	 */
 	public function setTemplate($value)
 	{
