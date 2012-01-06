@@ -11,6 +11,27 @@
  * @since 1.0
  */
 
+/**
+ * FacebookConnectButton displays a facebook login button
+ *
+* The following example shows how to use  FacebookConnectButton
+ *
+ * <pre>
+ * $this->widget('ext.facebookconnect.FacebookConnectButton',
+ * 	array(
+ * 		'label' => 'Login with FB',
+ * 		'labelLogout' => 'Logout',
+ * 		'template' => '<span>{label}</span>',
+ * 		'redirect_uri' => CHtml::normalizeUrl(array('/site/contact')),
+ * 		'scope' => array('offline_access', 'publish_stream'),
+ * 		'display' => 'popup',
+ * 		'htmlOptions' => array(
+ * 			'class' => 'fb_auth',
+ * 		)
+ * 	)
+ * );
+ * </pre>
+ */
 class FacebookConnectButton extends CWidget
 {
 
@@ -33,7 +54,7 @@ class FacebookConnectButton extends CWidget
 	protected $labelLogout = 'Logout';
 
 	/**
-	 * HTML attributes to be rendered for the link
+	 * HTML attributes for the link
 	 * @var array
 	 */
 	protected $htmlOptions = array();
@@ -50,7 +71,6 @@ class FacebookConnectButton extends CWidget
 	/**
 	 * Initializes the widget.
 	 *
-	 * This method is called by the application before the controller starts to execute.
 	 * @return
 	 */
 	public function init()
@@ -163,7 +183,7 @@ class FacebookConnectButton extends CWidget
 	}
 
 	/**
-	 * Set redirect_uri
+	 * Set redirect_uri. User will be redirected to this link after successful login/logout
 	 *
 	 * @param string $value
 	 */
@@ -173,10 +193,14 @@ class FacebookConnectButton extends CWidget
 		{
 			$this->getParams()->add('redirect_uri', $value);
 		}
+		else
+		{
+			throw new FacebookConnectButtonExeption('Parameter "redirect_uri" must be a string');
+		}
 	}
 
 	/**
-	 * Set display
+	 * Set display method for facebook authorization page
 	 *
 	 * @param string $value
 	 */
@@ -186,25 +210,25 @@ class FacebookConnectButton extends CWidget
 		{
 			$this->getParams()->add('display', $value);
 		}
+		else
+		{
+			throw new FacebookConnectButtonExeption('Parameter "display" must be a string');
+		}
 	}
 
 	/**
 	 * Set scope. More info: http://developers.facebook.com/docs/reference/api/permissions/
 	 *
-	 * @param mixed $value
+	 * @param array $value
 	 */
-	public function setScope($value)
+	public function setScope(array $value)
 	{
-		if (true === is_array($value))
-		{
-			$value = implode(',', $value);
-		}
-
+		$value = implode(',', $value);
 		$this->getParams()->add('scope', $value);
 	}
 
 	/**
-	 * Set label for link
+	 * Set login label for link
 	 *
 	 * @param string $value
 	 */
@@ -213,6 +237,10 @@ class FacebookConnectButton extends CWidget
 		if (true === is_string($value))
 		{
 			$this->label = $value;
+		}
+		else
+		{
+			throw new FacebookConnectButtonExeption('Parameter "label" must be a string');
 		}
 	}
 
@@ -227,6 +255,10 @@ class FacebookConnectButton extends CWidget
 		{
 			$this->labelLogout = $value;
 		}
+		else
+		{
+			throw new FacebookConnectButtonExeption('Parameter "labelLogout" must be a string');
+		}
 	}
 
 	/**
@@ -240,5 +272,11 @@ class FacebookConnectButton extends CWidget
 		{
 			$this->template = $value;
 		}
+		else
+		{
+			throw new FacebookConnectButtonExeption('Parameter "template" must be a string');
+		}
 	}
 }
+
+class FacebookConnectButtonExeption extends Exception {}

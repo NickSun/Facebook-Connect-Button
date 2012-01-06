@@ -531,8 +531,6 @@ class FConnect
 	/**
 	 * Constructs and returns the name of the cookie that
 	 * potentially houses the signed request for the app user.
-	 * The cookie is not set by the BaseFacebook class, but
-	 * it may be set by the JavaScript SDK.
 	 *
 	 * @return string the name of the cookie that would house
 	 *         the signed request value.
